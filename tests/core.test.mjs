@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{Stabilizer,suggestions,distance}from'../shared/core.mjs';
+test('held gesture inserts once; release permits repeated letter',()=>{const s=new Stabilizer();assert.equal(s.update('L',.95,0),null);assert.equal(s.update('L',.95,700),'L');assert.equal(s.update('L',.95,1500),null);s.update(null,0,1600);s.update(null,0,2000);s.update('L',.95,2100);assert.equal(s.update('L',.95,2800),'L')});
+test('uncertain predictions cannot auto insert',()=>{const s=new Stabilizer();s.update('A',.6,0);assert.equal(s.update('A',.6,900),null)});
+test('transition restarts hold and does not bypass release',()=>{const s=new Stabilizer();s.update('A',.9,0);s.update('B',.9,500);assert.equal(s.update('B',.9,800),null);assert.equal(s.update('B',.9,1200),'B');assert.equal(s.update('C',.9,2000),null)});
+test('short hand dropout does not unlock',()=>{const s=new Stabilizer();s.update('A',.9,0);s.update('A',.9,700);s.update(null,0,800);assert.equal(s.update('A',.9,900),null);assert.equal(s.update('A',.9,1800),null)});
+test('prefix and typo suggestions include COVID and custom words',()=>{assert.deepEqual(suggestions('COV',['COVID','HELLO']),['COVID']);assert.ok(suggestions('COVD',['COVID']).includes('COVID'));assert.deepEqual(suggestions('BMS',['BMSIT']),['BMSIT']);assert.equal(distance('HELLO','HELO'),1)});

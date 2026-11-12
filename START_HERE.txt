@@ -1,0 +1,16 @@
+SIGNSCRIBE - ISL SPELLING ASSISTANT
+
+1. Extract the ZIP completely.
+2. Open ISL-Spelling-Assistant in VS Code.
+3. Install Node.js 22.12+ if needed; reopen VS Code.
+4. Open Terminal > New Terminal. Run:
+       npm install
+       npm start
+5. Open http://127.0.0.1:3001
+
+Keyboard demo, editing, suggestions, vocabulary and history are ready.
+Read README.md sections 2-4 for Python setup, real ISL collection and training.
+The ZIP does not contain a pretrained ISL alphabet classifier.
+Camera recognition needs authentic labelled samples and local training.
+MongoDB setup is in README.md section 6. Default storage is an explicit JSON demo.
+Test evidence and remaining checks: docs/TESTING.md.
